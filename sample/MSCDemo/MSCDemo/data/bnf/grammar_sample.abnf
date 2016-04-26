@@ -2,5 +2,6 @@
 language zh-CN;
 mode voice;
 root $main;
-$main = $place1;
-$place1 = 拍照|茄子|田七|牌照;
+$main = $place1 到 $place2;
+$place1 = 上海|合肥;
+$place2 = 北京|武汉|南京|天津|东京;
