@@ -70,6 +70,17 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    //设置广播内容
+
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"applicationDidBecomeActive", @"applicationDidBecomeActive",
+                           nil ];
+    
+    //将内容封装到广播中 给ios系统发送广播
+    // ChangeTheme频道
+    [nc postNotificationName:@"applicationDidBecomeActive" object:self userInfo:dict];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

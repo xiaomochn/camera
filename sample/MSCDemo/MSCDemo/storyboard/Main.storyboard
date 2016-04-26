@@ -805,6 +805,9 @@
                                                 <state key="normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onshut:" destination="pyR-L4-AT1" eventType="touchUpInside" id="Oby-UC-Fje"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-f4-xip" userLabel="VideoButton">
                                                 <rect key="frame" x="8" y="21" width="44" height="44"/>
@@ -815,8 +818,11 @@
                                                 <state key="normal" image="VideoButton">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="oncamer:" destination="pyR-L4-AT1" eventType="touchUpInside" id="Q9d-Zf-VhF"/>
+                                                </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dH6-PU-EbE">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dH6-PU-EbE">
                                                 <rect key="frame" x="342" y="6" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="NFr-Cj-WNp"/>
@@ -825,6 +831,9 @@
                                                 <state key="normal" image="OnOffButton_on">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="filterEnableButtonPressed:" destination="pyR-L4-AT1" eventType="touchUpInside" id="m6Z-RN-Ngc"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6P-ft-fVK" userLabel="MenuButton">
                                                 <rect key="frame" x="548" y="21" width="44" height="44"/>
@@ -835,6 +844,9 @@
                                                 <state key="normal" image="MenuButton">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onmenu:" destination="pyR-L4-AT1" eventType="touchUpInside" id="15Y-K0-Z6w"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
@@ -859,6 +871,9 @@
                                         <state key="normal" image="SwitchFlash_off">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onLight:" destination="pyR-L4-AT1" eventType="touchUpInside" id="UcX-5T-f3O"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8S-sd-rN5">
                                         <rect key="frame" x="548" y="8" width="44" height="44"/>
@@ -869,6 +884,9 @@
                                         <state key="normal" image="SwitchCamera">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="ontrun:" destination="pyR-L4-AT1" eventType="touchUpInside" id="xoi-EG-G0V"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5y-QA-py7">
                                         <rect key="frame" x="0.0" y="-22" width="600" height="21"/>
@@ -909,6 +927,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="cameraFlashButton" destination="ETU-P8-LAY" id="3cZ-Ms-Sgn"/>
                         <outlet property="cameraView" destination="Xlj-Xl-fK7" id="f7h-uf-chE"/>
                     </connections>
                 </viewController>

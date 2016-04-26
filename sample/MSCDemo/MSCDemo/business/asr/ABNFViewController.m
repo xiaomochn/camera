@@ -17,6 +17,11 @@
 #define GRAMMAR_TYPE_BNF     @"bnf"
 #define GRAMMAR_TYPE_ABNF    @"abnf"
 
+@interface ABNFViewController()
+{
+
+}
+@end
 
 @implementation ABNFViewController
 
@@ -28,24 +33,29 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.isCanceled = NO;
+      self.isCanceled = NO;
     self.curResult = [[NSMutableString alloc]init];
     self.grammarType = GRAMMAR_TYPE_ABNF;
     self.uploader = [[IFlyDataUploader alloc] init];
-    
-//    CGFloat posY = self.textView.frame.origin.y+self.textView.frame.size.height/6;
+    self.cameraView.delegate=self;
+
     _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, 100, 0, 0) withParentView:self.view];
-//    _textView.layer.borderColor = [[UIColor whiteColor] CGColor];
-//    _textView.layer.borderWidth = 0.5f;
-//    [_textView.layer setCornerRadius:7.0f];
-    self.cameraView = [[CameraSessionView alloc] initWithFrame:self.view.frame];
-//    self.cameraView.delegate = self;
-//    [self.view addSubview:self.cameraView];
-//    [self.view add]
+
+     self.filterEnable = YES;
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    // 成为听众一旦有广播就来调用self recvBcast:函数
+    [nc addObserver:self selector:@selector(recvBcast:) name:@"applicationDidBecomeActive" object:nil];
   
 }
-
+- (void) recvBcast:(NSNotification *)notify  {
+    if ([notify userInfo][@"applicationDidBecomeActive"] != nil) {
+        if (_iFlySpeechRecognizer!=nil) {
+             [self starRecBtnHandler:nil];
+        }
+       
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -236,7 +246,10 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
  ****/
 - (void) onEndOfSpeech
 {
-     [self starRecBtnHandler:nil];
+    if (self.filterEnable) {
+          [self starRecBtnHandler:nil];
+    }
+   
     [_popUpView showText: @"停止录音"];
 }
 
@@ -382,6 +395,88 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     }
 }
 
+//-(void)didCaptureImageWithData:(NSData *)imageData {
+//    NSLog(@"CAPTURED IMAGE DATA");
+//    UIImage *image = [[UIImage alloc] initWithData:imageData];
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+//    //[self.cameraView removeFromSuperview];
+//}
 
+-(void)didCaptureImage:(UIImage *)image {
+    NSLog(@"CAPTURED IMAGE");
+    if (image!=nil) {
+         UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    //Show error alert if image could not be saved
+    if (error) [[[UIAlertView alloc] initWithTitle:@"Error!" message:@"Image couldn't be saved" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+}
+- (IBAction)onLight:(id)sender {
+   
+    switch ([self.cameraView onTapFlashButton]) {
+        case 0:
+            [self.cameraFlashButton setImage:[UIImage imageNamed:@"SwitchFlash_off"] forState:UIControlStateNormal];
+            break;
+            
+        case 1:
+            [self.cameraFlashButton setImage:[UIImage imageNamed:@"SwitchFlash_on"] forState:UIControlStateNormal];
+            break;
+            
+        case 2:
+            [self.cameraFlashButton setImage:[UIImage imageNamed:@"SwitchFlash_auto"] forState:UIControlStateNormal];
+            break;
+            
+        default:
+            break;
+    }
+}
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+
+- (IBAction)ontrun:(id)sender {
+   
+   [self.cameraView onTapToggleButton ];
+}
+- (IBAction)oncamer:(id)sender {
+    [self openUrl:@"assets-library"];
+}
+- (IBAction)onshut:(id)sender {
+    [self.cameraView onTapShutterButton ];
+}
+- (IBAction)onmenu:(id)sender {
+}
+
+
+
+
+
+- (IBAction)filterEnableButtonPressed:(UIButton *)sender {
+    if (self.filterEnable) {
+        self.filterEnable = NO;
+        [sender setImage:[UIImage imageNamed:@"OnOffButton_off"] forState:UIControlStateNormal];
+        [self stopBtnHandler:nil];
+    }else{
+        self.filterEnable = YES;
+          [self starRecBtnHandler:nil];
+        [sender setImage:[UIImage imageNamed:@"OnOffButton_on"] forState:UIControlStateNormal];
+    }
+    
+}
+
+
+-(void)openUrl:(NSString *)urlStr{
+    //注意url中包含协议名称，iOS根据协议确定调用哪个应用，例如发送邮件是“sms://”其中“//”可以省略写成“sms:”(其他协议也是如此)
+    NSURL *url=[NSURL URLWithString:urlStr];
+    UIApplication *application=[UIApplication sharedApplication];
+    if(![application canOpenURL:url]){
+        NSLog(@"无法打开\"%@\"，请确保此应用已经正确安装.",url);
+        return;
+    }
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 @end

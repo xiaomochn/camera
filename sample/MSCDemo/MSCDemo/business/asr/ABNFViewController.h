@@ -27,12 +27,12 @@
 @interface ABNFViewController : UIViewController<IFlySpeechRecognizerDelegate,UIActionSheetDelegate,CACameraSessionDelegate>
 
 @property (weak, nonatomic) IBOutlet CameraSessionView *cameraView;
-
+@property (weak, nonatomic) IBOutlet UIButton *cameraFlashButton;
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//语法识别对象
 @property (nonatomic, strong) IFlyDataUploader *uploader;//数据上传对象
 
 @property (nonatomic, strong) PopupView *popUpView;
-
+@property (nonatomic, assign) BOOL filterEnable;
 
 //@property (weak, nonatomic) IBOutlet UITextView *textView;
 //@property (weak, nonatomic) IBOutlet UIButton *uploadBtn;

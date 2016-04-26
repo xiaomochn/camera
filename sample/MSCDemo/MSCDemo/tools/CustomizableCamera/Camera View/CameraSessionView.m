@@ -33,10 +33,10 @@
 
 //Object References
 @property (nonatomic, strong) CaptureSessionManager *captureManager;
-@property (nonatomic, strong) CameraShutterButton *cameraShutter;
-@property (nonatomic, strong) CameraToggleButton *cameraToggle;
-@property (nonatomic, strong) CameraFlashButton *cameraFlash;
-@property (nonatomic, strong) CameraDismissButton *cameraDismiss;
+//@property (nonatomic, strong) CameraShutterButton *cameraShutter;
+//@property (nonatomic, strong) CameraToggleButton *cameraToggle;
+//@property (nonatomic, strong) CameraFlashButton *cameraFlash;
+//@property (nonatomic, strong) CameraDismissButton *cameraDismiss;
 @property (nonatomic, strong) CameraFocalReticule *focalReticule;
 //@property (nonatomic, strong) UIView *topBarView;
 
@@ -237,11 +237,40 @@
     [_captureManager captureStillImage];
 }
 
-- (void)onTapFlashButton {
-    BOOL enable = !self.captureManager.isTorchEnabled;
-    self.captureManager.enableTorch = enable;
+//- (void)onTapFlashButton {
+//    BOOL enable = !self.captureManager.isTorchEnabled;
+//    self.captureManager.enableTorch = enable;
+//}
+-(NSInteger)onTapFlashButton{
+    
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if ([device hasTorch] && [device hasFlash])
+    {
+        [device lockForConfiguration:nil];
+//        if (enableTorch) { [device setTorchMode:AVCaptureTorchModeOn]; }
+//        else { [device setTorchMode:AVCaptureTorchModeOff]; }
+       
+        switch (device.torchMode) {
+            case AVCaptureTorchModeOff:
+               [device setTorchMode:AVCaptureTorchModeAuto];
+                break;
+                
+            case AVCaptureTorchModeOn:
+                [device setTorchMode:AVCaptureTorchModeOff];
+                break;
+                
+            case AVCaptureTorchModeAuto:
+               [device setTorchMode:AVCaptureTorchModeOn];
+                break;
+                
+            default:
+                break;
+        }
+         [device unlockForConfiguration];
+        return device.torchMode;
+    }
+    return AVCaptureTorchModeOff;
 }
-
 - (void)onTapToggleButton {
     if (cameraBeingUsed == RearFacingCamera) {
         [self setupCaptureManager:FrontFacingCamera];
