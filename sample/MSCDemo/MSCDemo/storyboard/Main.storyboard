@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--讯飞语音示例-->
@@ -789,8 +790,8 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gv-3e-H97" userLabel="OverLayer">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xlj-Xl-fK7" customClass="CameraSessionView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlj-Xl-fK7" customClass="CameraSessionView">
+                                        <rect key="frame" x="0.0" y="-1" width="600" height="601"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5C-H0-Oq4" userLabel="Footer">
@@ -917,11 +918,21 @@
                                     <constraint firstAttribute="bottom" secondItem="Xlj-Xl-fK7" secondAttribute="bottom" id="zgg-Ae-iVo"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmC-so-SJ2">
+                                <rect key="frame" x="60" y="80" width="480" height="440"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="VmC-so-SJ2" firstAttribute="leading" secondItem="CmZ-La-HkE" secondAttribute="leadingMargin" constant="40" id="AS1-9p-tp8"/>
+                            <constraint firstItem="VmC-so-SJ2" firstAttribute="top" secondItem="fND-2t-qKW" secondAttribute="bottom" constant="80" id="D1h-lt-4yH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VmC-so-SJ2" secondAttribute="trailing" constant="40" id="NB5-w3-FCn"/>
                             <constraint firstAttribute="bottom" secondItem="9Gv-3e-H97" secondAttribute="bottom" id="O5w-7E-opH"/>
                             <constraint firstItem="9Gv-3e-H97" firstAttribute="leading" secondItem="CmZ-La-HkE" secondAttribute="leading" id="VS9-JL-bie"/>
                             <constraint firstItem="9Gv-3e-H97" firstAttribute="top" secondItem="CmZ-La-HkE" secondAttribute="top" id="dVm-dk-3Q0"/>
+                            <constraint firstItem="m4m-qq-CEl" firstAttribute="top" secondItem="VmC-so-SJ2" secondAttribute="bottom" constant="80" id="lcM-Qk-BKz"/>
                             <constraint firstAttribute="trailing" secondItem="9Gv-3e-H97" secondAttribute="trailing" id="opl-35-a2u"/>
                         </constraints>
                     </view>
@@ -929,6 +940,7 @@
                     <connections>
                         <outlet property="cameraFlashButton" destination="ETU-P8-LAY" id="3cZ-Ms-Sgn"/>
                         <outlet property="cameraView" destination="Xlj-Xl-fK7" id="f7h-uf-chE"/>
+                        <outlet property="detial" destination="VmC-so-SJ2" id="VDU-pL-hlz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1K-Kh-fN2" sceneMemberID="firstResponder"/>

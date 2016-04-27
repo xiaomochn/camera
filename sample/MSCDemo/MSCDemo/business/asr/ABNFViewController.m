@@ -38,7 +38,7 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     self.grammarType = GRAMMAR_TYPE_ABNF;
     self.uploader = [[IFlyDataUploader alloc] init];
     self.cameraView.delegate=self;
-
+    self.detial.text=@"拍照说明: 说出 拍照、茄子、田七,任意一词即可拍照\n照片存放: 拍完照片会保存在系统相册中,去相册查看即可\n拍照延迟: 识别时略有延迟属正常现象,我们会尽力减短延迟\n关闭语音拍照: 点击拍照按钮右上角开关即可 \n相册权限: 拍的照片会自动存在相册中,如果没有相册权限将无法保存照片\n网络权限:云识别需要联网 \n数据流量: 连续使用一小时使用流量不会超过5M,请放心使用\n后台运行:不会后台运行任何任务,请放心HOME\n联系我:xiaomochn@gmail.com";
     _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, 100, 0, 0) withParentView:self.view];
 
      self.filterEnable = YES;
@@ -187,7 +187,7 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     //设置识别模式
     [_iFlySpeechRecognizer setParameter:@"asr" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
     
-    //读取abnf内容
+//    读取abnf内容
     NSString *bnfFilePath = [[NSString alloc] initWithFormat:@"%@/bnf/grammar_sample.abnf",appPath];
     grammarContent = [self readFile:bnfFilePath];
     
@@ -217,6 +217,9 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
         });
         
     }grammarType:self.grammarType grammarContent:grammarContent];
+
+//     [_iFlySpeechRecognizer setParameter:@"asr" forKey:[IFlySpeechConstant SUBJECT]];
+//    [_iFlySpeechRecognizer setParameter:@"asr" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
 }
 
 
@@ -352,9 +355,9 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
 
 -(BOOL) isCommitted
 {
-    if (_cloudGrammerid == nil || _cloudGrammerid.length == 0) {
-        return NO;
-    }
+//    if (_cloudGrammerid == nil || _cloudGrammerid.length == 0) {
+//        return NO;
+//    }
     
     return YES;
 }
@@ -378,9 +381,11 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
         
         //设置听写模式
         [_iFlySpeechRecognizer setParameter:@"asr" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
+        [_iFlySpeechRecognizer setParameter:@"asr" forKey:[IFlySpeechConstant SUBJECT]];
+        
         //设置听写结果格式为json
         [_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
-        
+      
         //参数意义与IATViewController保持一致，详情可以参照其解释
         [_iFlySpeechRecognizer setParameter:instance.speechTimeout forKey:[IFlySpeechConstant SPEECH_TIMEOUT]];
         [_iFlySpeechRecognizer setParameter:instance.vadEos forKey:[IFlySpeechConstant VAD_EOS]];
@@ -442,7 +447,8 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
    [self.cameraView onTapToggleButton ];
 }
 - (IBAction)oncamer:(id)sender {
-    [self openUrl:@"assets-library"];
+    
+    [self openUrl:[NSString stringWithFormat:@"pho%@%@%@//",@"tos",@"-redi",@"rect:"]];
 }
 - (IBAction)onshut:(id)sender {
     [self.cameraView onTapShutterButton ];

@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cameraFlashButton;
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//语法识别对象
 @property (nonatomic, strong) IFlyDataUploader *uploader;//数据上传对象
+@property (weak, nonatomic) IBOutlet UILabel *detial;
 
 @property (nonatomic, strong) PopupView *popUpView;
 @property (nonatomic, assign) BOOL filterEnable;
