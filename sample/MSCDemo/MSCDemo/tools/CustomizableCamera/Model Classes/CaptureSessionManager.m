@@ -106,13 +106,13 @@
     }
     
     //Turn off the flash if on
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if ([device hasTorch])
-    {
-        [device lockForConfiguration:nil];
-        [device setTorchMode:AVCaptureTorchModeOff];
-        [device unlockForConfiguration];
-    }
+//    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+//    if ([device hasTorch])
+//    {
+//        [device lockForConfiguration:nil];
+//        [device setTorchMode:AVCaptureTorchModeOff];
+//        [device unlockForConfiguration];
+//    }
 }
 
 - (void)setEnableTorch:(BOOL)enableTorch

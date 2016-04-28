@@ -43,10 +43,14 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
 
      self.filterEnable = YES;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
     // 成为听众一旦有广播就来调用self recvBcast:函数
     [nc addObserver:self selector:@selector(recvBcast:) name:@"applicationDidBecomeActive" object:nil];
-  
+ 
+}
+- (BOOL)canBecomeFirstResponder{
+    return YES;
 }
 - (void) recvBcast:(NSNotification *)notify  {
     if ([notify userInfo][@"applicationDidBecomeActive"] != nil) {
@@ -456,7 +460,36 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
 - (IBAction)onmenu:(id)sender {
 }
 
-
+- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        switch (receivedEvent.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+            case UIEventSubtypeRemoteControlPlay:
+            case UIEventSubtypeRemoteControlPause:
+            case UIEventSubtypeRemoteControlStop:
+            {
+               [self.cameraView onTapShutterButton ];
+                //todo stop event
+                break;
+            }
+                
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                //todo play next song
+                
+                break;
+            }
+                
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                //todo play previous song
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
 
 
 
