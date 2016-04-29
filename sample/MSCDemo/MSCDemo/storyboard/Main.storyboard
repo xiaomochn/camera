@@ -918,21 +918,21 @@
                                     <constraint firstAttribute="bottom" secondItem="Xlj-Xl-fK7" secondAttribute="bottom" id="zgg-Ae-iVo"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmC-so-SJ2">
-                                <rect key="frame" x="60" y="80" width="480" height="440"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmC-so-SJ2">
+                                <rect key="frame" x="50" y="20" width="490" height="550"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="VmC-so-SJ2" firstAttribute="leading" secondItem="CmZ-La-HkE" secondAttribute="leadingMargin" constant="40" id="AS1-9p-tp8"/>
-                            <constraint firstItem="VmC-so-SJ2" firstAttribute="top" secondItem="fND-2t-qKW" secondAttribute="bottom" constant="80" id="D1h-lt-4yH"/>
+                            <constraint firstItem="VmC-so-SJ2" firstAttribute="leading" secondItem="CmZ-La-HkE" secondAttribute="leadingMargin" constant="30" id="AS1-9p-tp8"/>
+                            <constraint firstItem="VmC-so-SJ2" firstAttribute="top" secondItem="fND-2t-qKW" secondAttribute="bottom" constant="20" id="D1h-lt-4yH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VmC-so-SJ2" secondAttribute="trailing" constant="40" id="NB5-w3-FCn"/>
                             <constraint firstAttribute="bottom" secondItem="9Gv-3e-H97" secondAttribute="bottom" id="O5w-7E-opH"/>
                             <constraint firstItem="9Gv-3e-H97" firstAttribute="leading" secondItem="CmZ-La-HkE" secondAttribute="leading" id="VS9-JL-bie"/>
                             <constraint firstItem="9Gv-3e-H97" firstAttribute="top" secondItem="CmZ-La-HkE" secondAttribute="top" id="dVm-dk-3Q0"/>
-                            <constraint firstItem="m4m-qq-CEl" firstAttribute="top" secondItem="VmC-so-SJ2" secondAttribute="bottom" constant="80" id="lcM-Qk-BKz"/>
+                            <constraint firstItem="m4m-qq-CEl" firstAttribute="top" secondItem="VmC-so-SJ2" secondAttribute="bottom" constant="30" id="lcM-Qk-BKz"/>
                             <constraint firstAttribute="trailing" secondItem="9Gv-3e-H97" secondAttribute="trailing" id="opl-35-a2u"/>
                         </constraints>
                     </view>
@@ -940,6 +940,7 @@
                     <connections>
                         <outlet property="cameraFlashButton" destination="ETU-P8-LAY" id="3cZ-Ms-Sgn"/>
                         <outlet property="cameraView" destination="Xlj-Xl-fK7" id="f7h-uf-chE"/>
+                        <outlet property="cap" destination="UHu-f4-xip" id="yVJ-nq-6jR"/>
                         <outlet property="detial" destination="VmC-so-SJ2" id="VDU-pL-hlz"/>
                     </connections>
                 </viewController>

@@ -20,6 +20,7 @@
 @interface ABNFViewController()
 {
 
+    __weak IBOutlet UIButton *cap;
 }
 @end
 
@@ -39,7 +40,7 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     self.uploader = [[IFlyDataUploader alloc] init];
     self.cameraView.delegate=self;
     self.detial.text=@"拍照说明: 说出 给我拍照、茄子、田七、哈喽,任意一词即可拍照\n照片存放: 拍完照片会保存在系统相册中,去相册查看即可\n拍照延迟: 识别时略有延迟属正常现象,我们会尽力减短延迟\n关闭语音拍照: 点击拍照按钮右上角开关即可 \n相册权限: 拍的照片会自动存在相册中,如果没有相册权限将无法保存照片\n网络权限:云识别需要联网 \n数据流量: 连续使用一小时使用流量不会超过5M,请放心使用\n后台运行:不会后台运行任何任务,请放心HOME\n联系我:xiaomochn@gmail.com";
-    _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, 100, 0, 0) withParentView:self.view];
+    _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(20, 2, 0, 0) withParentView:self.view];
 
      self.filterEnable = YES;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -245,7 +246,7 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
  ****/
 - (void) onBeginOfSpeech
 {
-    [_popUpView showText:@"正在录音"];
+    [_popUpView showText:@"正在识别"];
 }
 
 /**
@@ -257,7 +258,7 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
           [self starRecBtnHandler:nil];
     }
    
-    [_popUpView showText: @"停止录音"];
+    [_popUpView showText: @"停止语音拍照"];
 }
 
 
@@ -273,31 +274,26 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     
     NSLog(@"error=%d",[error errorCode]);
     
-    NSString *text ;
+    NSString *text = @"";
     
     if (self.isCanceled) {
-        text = @"识别取消";
+        text = @"识别语音拍照";
        
     }
     else if (error.errorCode ==0 ) {
         
         if (self.curResult.length==0 || [self.curResult hasPrefix:@"nomatch"]) {
             
-            text = @"无匹配结果";
+          
         }
         else
         {
             [_cameraView onTapShutterButton];
-            text = @"识别成功";
+            text = @"拍照";
 //            _textView.text = _curResult;
         }
     }
-    else
-    {
-        text = [NSString stringWithFormat:@"发生错误：%d %@",error.errorCode,error.errorDesc];
-        NSLog(@"%@",text);
-        
-    }
+    
     
     [_popUpView showText: text];
     
@@ -413,8 +409,10 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
 
 -(void)didCaptureImage:(UIImage *)image {
     NSLog(@"CAPTURED IMAGE");
+
     if (image!=nil) {
          UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        [cap setImage:image forState:UIControlStateNormal];
     }
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -455,9 +453,12 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     [self openUrl:[NSString stringWithFormat:@"pho%@%@%@//",@"tos",@"-redi",@"rect:"]];
 }
 - (IBAction)onshut:(id)sender {
+   
+    [_popUpView showText: @"拍照成功"];
     [self.cameraView onTapShutterButton ];
 }
 - (IBAction)onmenu:(id)sender {
+    self.detial.hidden=!self.detial.hidden;
 }
 
 - (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
@@ -468,7 +469,8 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
             case UIEventSubtypeRemoteControlPause:
             case UIEventSubtypeRemoteControlStop:
             {
-               [self.cameraView onTapShutterButton ];
+               
+               [self onshut:nil];
                 //todo stop event
                 break;
             }

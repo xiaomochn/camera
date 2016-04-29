@@ -20,7 +20,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="请一定允许我使用相册否则拍摄的照片将无法保存" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zso-o5-mZm">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="请一定允许我使用相册否则拍摄的照片将无法保存" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zso-o5-mZm">
                     <rect key="frame" x="21" y="228" width="440" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,7 +37,9 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="Spv-95-Mlx" secondAttribute="centerX" id="0W1-Dv-q4N"/>
                 <constraint firstAttribute="centerY" secondItem="Zso-o5-mZm" secondAttribute="centerY" id="I6a-BH-7Mx"/>
+                <constraint firstAttribute="trailing" secondItem="Zso-o5-mZm" secondAttribute="trailing" constant="20" id="Obd-W7-SMU"/>
                 <constraint firstItem="Zso-o5-mZm" firstAttribute="top" secondItem="Spv-95-Mlx" secondAttribute="bottom" constant="19" id="YN4-Ec-bb1"/>
+                <constraint firstItem="Zso-o5-mZm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="sXl-i9-5Dg"/>
                 <constraint firstAttribute="centerX" secondItem="Zso-o5-mZm" secondAttribute="centerX" id="zIL-Cr-4bk"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
