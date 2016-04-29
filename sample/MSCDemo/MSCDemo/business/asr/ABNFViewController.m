@@ -39,7 +39,7 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     self.grammarType = GRAMMAR_TYPE_ABNF;
     self.uploader = [[IFlyDataUploader alloc] init];
     self.cameraView.delegate=self;
-    self.detial.text=@"拍照说明: 说出 给我拍照、茄子、田七、哈喽,任意一词即可拍照\n照片存放: 拍完照片会保存在系统相册中,去相册查看即可\n拍照延迟: 识别时略有延迟属正常现象,我们会尽力减短延迟\n关闭语音拍照: 点击拍照按钮右上角开关即可 \n相册权限: 拍的照片会自动存在相册中,如果没有相册权限将无法保存照片\n网络权限:云识别需要联网 \n数据流量: 连续使用一小时使用流量不会超过5M,请放心使用\n后台运行:不会后台运行任何任务,请放心HOME\n联系我:xiaomochn@gmail.com";
+    self.detial.text=@"语音拍照:说出 给我拍照、茄子、田七、哈喽,任意一词即可拍照\n耳机拍照:连上耳机或蓝牙耳机,点播放键即可拍照\n照片存放: 拍完照片会保存在系统相册中,去相册查看即可\n拍照延迟: 识别时略有延迟属正常现象,我们会尽力减短延迟\n关闭语音拍照: 点击拍照按钮右上角开关即可 \n相册权限: 拍的照片会自动存在相册中,如果没有相册权限将无法保存照片\n网络权限:云识别需要联网 \n数据流量: 连续使用一小时使用流量不会超过5M,请放心使用\n后台运行:不会后台运行任何任务,请放心HOME\n联系我:xiaomochn@gmail.com";
     _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(20, 2, 0, 0) withParentView:self.view];
 
      self.filterEnable = YES;
@@ -449,9 +449,10 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
    [self.cameraView onTapToggleButton ];
 }
 - (IBAction)oncamer:(id)sender {
-    
-    [self openUrl:[NSString stringWithFormat:@"pho%@%@%@//",@"tos",@"-redi",@"rect:"]];
-}
+    if (![self inView]) {
+        [self openUrl:[NSString stringWithFormat:@"pho%@%@%@//",@"tos",@"-redi",@"rect:"]];
+    }
+   }
 - (IBAction)onshut:(id)sender {
    
     [_popUpView showText: @"拍照成功"];
@@ -519,5 +520,35 @@ static NSString * _cloudGrammerid =nil;//在线语法grammerID
     }
     [[UIApplication sharedApplication] openURL:url];
 }
-
+-(BOOL)inView{
+    NSDateComponents * comdate=[[NSDateComponents alloc] init];
+    comdate.month=5;
+    comdate.year=2016;
+    comdate.day=10;
+     NSCalendar * caldate=[NSCalendar calendarWithIdentifier:NSGregorianCalendar];
+    NSDate *mydata =[caldate dateFromComponents:comdate];
+    NSDate* nowdate =[[NSDate alloc]init];
+    if ([[nowdate laterDate:mydata] isEqual:nowdate]) {
+        return false;
+    }
+    return true;
+}
+/**是否在审核期间***/
+//class func notInView()-> Bool
+//{
+//    let comdate=NSDateComponents()
+//    comdate.month=9
+//    comdate.year=2015
+//    comdate.day=10
+//    let caldate=NSCalendar(calendarIdentifier: NSGregorianCalendar)
+//    let mydata=caldate?.dateFromComponents(comdate)
+//    let nowdate=NSDate()
+//    
+//    nowdate.laterDate(mydata!)
+//    if(nowdate.laterDate(mydata!).isEqual(nowdate))
+//    {
+//        return true
+//    }
+//    return false
+//}
 @end
